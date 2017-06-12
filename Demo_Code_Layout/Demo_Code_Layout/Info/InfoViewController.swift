@@ -119,6 +119,7 @@ extension InfoViewController: UICollectionViewDelegateFlowLayout {
             guard let strongSelf = self else { return }
             let editProfile = EditProfileViewController()
             editProfile.userProfile = strongSelf.userProfile
+            editProfile.imageView.image = headerViewCell.imgAvatar.image
             strongSelf.navigationController?.navigationBar.tintColor = .black
             strongSelf.navigationController?.pushViewController(editProfile, animated: true)
         }
