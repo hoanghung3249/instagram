@@ -1,0 +1,16 @@
+platform :ios, '9.0'
+use_frameworks!
+
+target 'Demo_Code_Layout' do
+  
+   pod 'SnapKit', '~> 3.2.0'
+   pod 'Firebase/Database'
+   pod 'Firebase/Auth'
+   pod 'Firebase/Storage’
+   pod 'Firebase/Core'
+   pod 'IQKeyboardManagerSwift'
+   pod 'ACProgressHUD-Swift', '~> 1.2'
+   pod "Pastel"
+   pod "Sharaku"
+   pod 'Kingfisher', '~> 3.0'
+end

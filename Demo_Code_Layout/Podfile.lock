@@ -1,0 +1,80 @@
+PODS:
+  - ACProgressHUD-Swift (1.2)
+  - Firebase/Auth (3.17.0):
+    - Firebase/Core
+    - FirebaseAuth (= 3.1.1)
+  - Firebase/Core (3.17.0):
+    - FirebaseAnalytics (= 3.9.0)
+    - FirebaseCore (= 3.6.0)
+  - Firebase/Database (3.17.0):
+    - Firebase/Core
+    - FirebaseDatabase (= 3.1.2)
+  - Firebase/Storage (3.17.0):
+    - Firebase/Core
+    - FirebaseStorage (= 1.1.0)
+  - FirebaseAnalytics (3.9.0):
+    - FirebaseCore (~> 3.6)
+    - FirebaseInstanceID (~> 1.0)
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseAuth (3.1.1):
+    - FirebaseAnalytics (~> 3.7)
+    - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - FirebaseCore (3.6.0):
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseDatabase (3.1.2):
+    - FirebaseAnalytics (~> 3.7)
+  - FirebaseInstanceID (1.0.10):
+    - FirebaseCore (~> 3.6)
+  - FirebaseStorage (1.1.0):
+    - FirebaseAnalytics (~> 3.7)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - GoogleToolboxForMac/DebugUtils (2.1.1):
+    - GoogleToolboxForMac/Defines (= 2.1.1)
+  - GoogleToolboxForMac/Defines (2.1.1)
+  - GoogleToolboxForMac/NSData+zlib (2.1.1):
+    - GoogleToolboxForMac/Defines (= 2.1.1)
+  - GoogleToolboxForMac/NSDictionary+URLArguments (2.1.1):
+    - GoogleToolboxForMac/DebugUtils (= 2.1.1)
+    - GoogleToolboxForMac/Defines (= 2.1.1)
+    - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
+  - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
+  - GTMSessionFetcher/Core (1.1.9)
+  - IQKeyboardManagerSwift (4.0.9)
+  - Kingfisher (3.8.0)
+  - Pastel (0.2.0)
+  - Sharaku (1.0.2)
+  - SnapKit (3.2.0)
+
+DEPENDENCIES:
+  - ACProgressHUD-Swift (~> 1.2)
+  - Firebase/Auth
+  - Firebase/Core
+  - Firebase/Database
+  - Firebase/Storage
+  - IQKeyboardManagerSwift
+  - Kingfisher (~> 3.0)
+  - Pastel
+  - Sharaku
+  - SnapKit (~> 3.2.0)
+
+SPEC CHECKSUMS:
+  ACProgressHUD-Swift: a08e699b2d8b3f3528d77c021ad6a326bc16f76d
+  Firebase: 4b66b5b59c43edac745b87f0c87e42cdd0279c13
+  FirebaseAnalytics: e5fe8486efc01bec33f6bf82e2fa9fce4b124052
+  FirebaseAuth: cc8a1824170adbd351edb7f994490a3fb5c18be6
+  FirebaseCore: 9691ee2ade70c098d7cf92440f4303f16d83ca75
+  FirebaseDatabase: 05c96d7b43a7368dc91c07791adb49683e1738d1
+  FirebaseInstanceID: b9eedd6846fb5e1f0f7279e1deaa7a7e4cf8392e
+  FirebaseStorage: a5c55b23741a49a72af8f30f95b3bb5ddbeda12d
+  GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
+  GTMSessionFetcher: 5c046c76a1f859bc9c187e918f18e4fc7bb57b5e
+  IQKeyboardManagerSwift: 2eefe6c429b86aa08bfbc1b5c891164d754adf91
+  Kingfisher: 7b8a055fc5c2afc61407d1a499e4e0981b1a6ac4
+  Pastel: f3d9a543a8bcdc385bd432513d3dcc0476276732
+  Sharaku: c18de569fc99f6e936f46ca812b571826cc658a7
+  SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
+
+PODFILE CHECKSUM: 3f6f3aaa189bbd3b02a7fc00fd0207d8c1931f05
+
+COCOAPODS: 1.2.1

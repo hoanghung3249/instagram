@@ -1,0 +1,6 @@
+framework module ACProgressHUD_Swift {
+  umbrella header "ACProgressHUD-Swift-umbrella.h"
+
+  export *
+  module * { export * }
+}
