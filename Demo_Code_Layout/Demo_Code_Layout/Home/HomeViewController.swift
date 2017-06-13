@@ -28,7 +28,7 @@ class HomeViewController: UITableViewController {
         // Do any additional setup after loading the view.
         self.view.backgroundColor = UIColor.white
         self.setupNavigation()
-        
+        self.tabBarController?.tabBar.isTranslucent = false
         tableView.register(HomeTableViewCell.self, forCellReuseIdentifier: cellId)
         tableView.estimatedRowHeight = 350.0
         tableView.separatorInset = UIEdgeInsets.zero

@@ -101,7 +101,7 @@ class CommentCell: UITableViewCell {
             make.bottom.equalTo(contentView.snp.bottom).offset(-5)
         }
         
-//        self.layoutIfNeeded()
+        self.layoutIfNeeded()
         self.imgAvatar.layer.cornerRadius = self.imgAvatar.frame.size.width / 2
         self.imgAvatar.layer.masksToBounds = true
     }
