@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 import Firebase
+import IQKeyboardManagerSwift
 
 class CommentViewController: UIViewController {
     
@@ -20,6 +21,7 @@ class CommentViewController: UIViewController {
     let ref = FIRDatabase.database().reference()
     let aut = FIRAuth.auth()?.currentUser
     var curUser:User?
+    
     
     let viewInput:UIView =  {
         let view:UIView = UIView()
@@ -62,6 +64,12 @@ class CommentViewController: UIViewController {
         self.setupUI()
         self.setupTableView()
         self.loadComment()
+        self.txtComment.delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
     }
     
     //MARK:- Support functions
@@ -78,6 +86,7 @@ class CommentViewController: UIViewController {
             make.top.equalTo(self.view.snp.top)
             make.left.equalTo(self.view.snp.left)
             make.width.equalTo(self.view.snp.width)
+//            make.height.equalTo(553.0).priority(999)
         }
         
         self.viewInput.snp.makeConstraints { (make) in
@@ -99,6 +108,13 @@ class CommentViewController: UIViewController {
             make.left.equalTo(txtComment.snp.right).offset(1)
             make.right.equalTo(viewInput.snp.right).offset(-5)
             make.bottom.equalTo(txtComment.snp.bottom)
+        }
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            let keyboardHeight = keyboardSize.height
+            print(keyboardHeight)
         }
     }
     
@@ -185,6 +201,13 @@ extension CommentViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
+    
+}
+
+
+extension CommentViewController: UITextFieldDelegate {
+    
+   
     
 }
 
