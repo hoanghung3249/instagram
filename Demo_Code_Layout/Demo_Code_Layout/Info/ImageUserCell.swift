@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 
 class ImageUserCell: UICollectionViewCell {
     
@@ -18,6 +19,15 @@ class ImageUserCell: UICollectionViewCell {
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
+    
+    var imgString = String() {
+        didSet {
+            let url = URL(string: imgString)
+            DispatchQueue.main.async {
+                self.imgUser.kf.setImage(with: url)
+            }
+        }
+    }
     
     
     override init(frame: CGRect) {
@@ -35,6 +45,7 @@ class ImageUserCell: UICollectionViewCell {
             make.bottom.equalTo(self.contentView.snp.bottom)
         }
     }
+    
     
     
     required init?(coder aDecoder: NSCoder) {

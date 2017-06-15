@@ -112,8 +112,6 @@ class HomeTableViewCell: UITableViewCell {
             self.labelStatus.text = post.status
             let urlAvatar = URL(string: post.avatarUrl)
             let urlStatus = URL(string: post.urlStatus)
-            self.imgAvatar.kf.setImage(with: urlAvatar)
-            self.imgStatus.kf.setImage(with: urlStatus)
             let imageName = post.likes == nil || !post.isLiked! ? "like" : "likeSelected"
             btnLike.setImage(UIImage(named:imageName), for: .normal)
             guard let count = post.likeCount else {
@@ -124,6 +122,10 @@ class HomeTableViewCell: UITableViewCell {
                 btnShowLike.setTitle("\(count) Likes", for: .normal)
             } else if post.likeCount == 0 {
                 btnShowLike.setTitle("Be the first to Like this", for: .normal)
+            }
+            DispatchQueue.main.async {
+                self.imgAvatar.kf.setImage(with: urlAvatar)
+                self.imgStatus.kf.setImage(with: urlStatus)
             }
         }
     }

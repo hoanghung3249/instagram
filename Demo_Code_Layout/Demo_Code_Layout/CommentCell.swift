@@ -51,7 +51,9 @@ class CommentCell: UITableViewCell {
             self.lblName.text = comment.username
             self.lblComment.text = comment.comment
             let url = URL(string: comment.avatarUrl!)
-            self.imgAvatar.kf.setImage(with: url)
+            DispatchQueue.main.async {
+                self.imgAvatar.kf.setImage(with: url)
+            }
         }
     }
     

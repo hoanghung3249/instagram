@@ -42,7 +42,9 @@ class SearchCell: UITableViewCell {
         didSet {
             self.lblName.text = user.username
             let imgUrl = URL(string: user.avatarUrl)
-            self.imgAvatar.kf.setImage(with: imgUrl)
+            DispatchQueue.main.async {
+                self.imgAvatar.kf.setImage(with: imgUrl)
+            }
         }
     }
     

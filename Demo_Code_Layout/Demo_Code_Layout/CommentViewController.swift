@@ -56,6 +56,21 @@ class CommentViewController: UIViewController {
         return tbv
     }()
     
+    let scrollViewContaint:UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.backgroundColor = .white
+        scrollView.isScrollEnabled = true
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
+    
+    let vwContainer:UIView =  {
+        let view:UIView = UIView()
+        view.backgroundColor = .white
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     //MARK:- Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,18 +89,35 @@ class CommentViewController: UIViewController {
     
     //MARK:- Support functions
     private func addSubView() {
-        self.view.addSubview(tableView)
-        self.view.addSubview(viewInput)
+        self.view.addSubview(scrollViewContaint)
+        scrollViewContaint.addSubview(vwContainer)
+        self.vwContainer.addSubview(tableView)
+        self.vwContainer.addSubview(viewInput)
         self.viewInput.addSubview(txtComment)
         self.viewInput.addSubview(btnSend)
     }
     
     private func setupUI() {
         
-        self.tableView.snp.makeConstraints { (make) in
+        self.scrollViewContaint.snp.makeConstraints { (make) in
             make.top.equalTo(self.view.snp.top)
+            make.right.equalTo(self.view.snp.right)
             make.left.equalTo(self.view.snp.left)
+            make.bottom.equalTo(self.view.snp.bottom)
+        }
+        
+        self.vwContainer.snp.makeConstraints { (make) in
+            make.top.equalTo(scrollViewContaint.snp.top)
+            make.left.equalTo(scrollViewContaint.snp.left)
             make.width.equalTo(self.view.snp.width)
+            make.height.equalTo(self.view.snp.height).priority(999)
+            make.bottom.equalTo(scrollViewContaint.snp.bottom)
+        }
+        
+        self.tableView.snp.makeConstraints { (make) in
+            make.top.equalTo(vwContainer.snp.top)
+            make.left.equalTo(vwContainer.snp.left)
+            make.width.equalTo(vwContainer.snp.width)
 //            make.height.equalTo(553.0).priority(999)
         }
         
@@ -94,7 +126,7 @@ class CommentViewController: UIViewController {
             make.left.equalTo(tableView.snp.left)
             make.width.equalTo(tableView.snp.width)
             make.height.equalTo(50)
-            make.bottom.equalTo(self.view.snp.bottom)
+            make.bottom.equalTo(vwContainer.snp.bottom)
         }
         
         self.txtComment.snp.makeConstraints { (make) in

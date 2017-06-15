@@ -100,8 +100,8 @@ extension InfoViewController: UICollectionViewDelegateFlowLayout {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ImageUserCell
-        let url = URL(string: arrUrlString[indexPath.row])
-        cell.imgUser.kf.setImage(with: url)
+        let urlString = arrUrlString[indexPath.row]
+        cell.imgString = urlString
         return cell
     }
     

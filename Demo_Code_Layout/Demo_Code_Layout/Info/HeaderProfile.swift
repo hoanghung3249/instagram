@@ -15,7 +15,9 @@ class HeaderProfile: UICollectionReusableView {
         didSet {
             self.lblName.text = user?.username
             let imgAvatar = URL(string: (user?.avatarUrl)!)
-            self.imgAvatar.kf.setImage(with: imgAvatar)
+            DispatchQueue.main.async {
+                self.imgAvatar.kf.setImage(with: imgAvatar)
+            }
         }
     }
     
