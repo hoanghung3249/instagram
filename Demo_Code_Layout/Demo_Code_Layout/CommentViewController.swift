@@ -111,7 +111,7 @@ class CommentViewController: UIViewController {
             make.left.equalTo(scrollViewContaint.snp.left)
             make.width.equalTo(self.view.snp.width)
             make.height.equalTo(self.view.snp.height).priority(999)
-            make.bottom.equalTo(scrollViewContaint.snp.bottom)
+//            make.bottom.equalTo(scrollViewContaint.snp.bottom)
         }
         
         self.tableView.snp.makeConstraints { (make) in
@@ -147,6 +147,14 @@ class CommentViewController: UIViewController {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             let keyboardHeight = keyboardSize.height
             print(keyboardHeight)
+            let tableViewHeight = self.tableView.frame.size.height - keyboardHeight
+            self.tableView.snp.removeConstraints()
+            self.tableView.snp.makeConstraints({ (make) in
+                make.top.equalTo(vwContainer.snp.top)
+                make.left.equalTo(vwContainer.snp.left)
+                make.width.equalTo(vwContainer.snp.width)
+                make.height.equalTo(tableViewHeight)
+            })
         }
     }
     
@@ -189,6 +197,13 @@ class CommentViewController: UIViewController {
             return
         } else {
             guard let commentString = txtComment.text else { return }
+            self.view.endEditing(true)
+            self.tableView.snp.removeConstraints()
+            self.tableView.snp.makeConstraints { (make) in
+                make.top.equalTo(vwContainer.snp.top)
+                make.left.equalTo(vwContainer.snp.left)
+                make.width.equalTo(vwContainer.snp.width)
+            }
             uploadComment(commentString)
         }
         
@@ -239,6 +254,16 @@ extension CommentViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension CommentViewController: UITextFieldDelegate {
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        self.tableView.snp.removeConstraints()
+        self.tableView.snp.makeConstraints { (make) in
+            make.top.equalTo(vwContainer.snp.top)
+            make.left.equalTo(vwContainer.snp.left)
+            make.width.equalTo(vwContainer.snp.width)
+        }
+        return true
+    }
    
     
 }

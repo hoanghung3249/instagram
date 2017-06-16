@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FIRApp.configure()
         IQKeyboardManager.sharedManager().enable = true
+        IQKeyboardManager.sharedManager().enableAutoToolbar = false
         window = UIWindow(frame: UIScreen.main.bounds)
         if (FIRAuth.auth()?.currentUser?.uid) != nil {
             window?.rootViewController = TabBarController()
