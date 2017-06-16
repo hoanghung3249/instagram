@@ -148,6 +148,13 @@ class CommentViewController: UIViewController {
             let keyboardHeight = keyboardSize.height
             print(keyboardHeight)
             let tableViewHeight = self.tableView.frame.size.height - keyboardHeight
+            var indexPath:IndexPath?
+            if self.arrComment.count != 0 {
+                indexPath = IndexPath(row: self.arrComment.count - 1, section: 0)
+            } else {
+                indexPath = IndexPath(row: 0, section: 0)
+            }
+            self.tableView.scrollToRow(at: indexPath!, at: .bottom, animated: true)
             self.tableView.snp.removeConstraints()
             self.tableView.snp.makeConstraints({ (make) in
                 make.top.equalTo(vwContainer.snp.top)
