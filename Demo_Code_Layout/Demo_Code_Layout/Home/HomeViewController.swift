@@ -47,6 +47,7 @@ class HomeViewController: UITableViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont(name: "Billabong", size: 30)!]
         self.navigationItem.title = "Instagram"
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Log Out", style: .plain, target: self, action: #selector(logOut))
+        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.black
     }
     
     

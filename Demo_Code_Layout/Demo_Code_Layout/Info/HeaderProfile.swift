@@ -25,7 +25,7 @@ class HeaderProfile: UICollectionReusableView {
     
     let lblName:UILabel = {
         let label:UILabel = UILabel()
-        label.text = "Label"
+        label.text = ""
         label.font = UIFont.boldSystemFont(ofSize: 15)
         label.textColor = UIColor.black
         label.translatesAutoresizingMaskIntoConstraints = false
