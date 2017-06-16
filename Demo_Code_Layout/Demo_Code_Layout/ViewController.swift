@@ -65,7 +65,7 @@ class ViewController: UIViewController {
     
     lazy var buttonLogin:UIButton = { [unowned self] in
         let button:UIButton = UIButton()
-        button.setTitle("Log in", for: .normal)
+        button.setTitle("LOG IN", for: .normal)
         button.layer.cornerRadius = 5
         button.backgroundColor = UIColor(red: 206.0/255.0, green: 206.0/255.0, blue: 206.0/255.0, alpha: 0.2)
         button.titleLabel?.textColor = UIColor.white

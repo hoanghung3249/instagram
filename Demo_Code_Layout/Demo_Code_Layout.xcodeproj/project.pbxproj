@@ -14,7 +14,6 @@
 		4531F83E1EEBF5400045C08E /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4531F83D1EEBF5400045C08E /* SearchCell.swift */; };
 		453C83CE1EE9AD230003CEEE /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453C83CD1EE9AD230003CEEE /* EditProfileViewController.swift */; };
 		455C8A5A1EDE692D004858FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455C8A591EDE692D004858FC /* AppDelegate.swift */; };
-		455C8A5C1EDE692D004858FC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455C8A5B1EDE692D004858FC /* ViewController.swift */; };
 		455C8A611EDE692D004858FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 455C8A601EDE692D004858FC /* Assets.xcassets */; };
 		455C8A641EDE692D004858FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 455C8A621EDE692D004858FC /* LaunchScreen.storyboard */; };
 		455C8A6F1EDEACA4004858FC /* Billabong.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 455C8A6E1EDEAC52004858FC /* Billabong.ttf */; };
@@ -26,6 +25,7 @@
 		457547F01EE163760008C995 /* ProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 457547ED1EE163760008C995 /* ProgressHUD.bundle */; };
 		457547F11EE163760008C995 /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 457547EF1EE163760008C995 /* ProgressHUD.m */; };
 		457547F91EE1665E0008C995 /* InstagramActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457547F81EE1665E0008C995 /* InstagramActivityIndicator.swift */; };
+		4597A6A41EF3E2F700DA88CC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4597A6A31EF3E2F700DA88CC /* ViewController.swift */; };
 		459AC7AA1EE8E9B600DD1D69 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459AC7A91EE8E9B600DD1D69 /* Extension.swift */; };
 		459AC7AD1EE8FD4E00DD1D69 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459AC7AC1EE8FD4E00DD1D69 /* User.swift */; };
 		459AC7AF1EE8FE6400DD1D69 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459AC7AE1EE8FE6400DD1D69 /* Post.swift */; };
@@ -47,7 +47,6 @@
 		453C83CD1EE9AD230003CEEE /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		455C8A561EDE692D004858FC /* Demo_Code_Layout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo_Code_Layout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		455C8A591EDE692D004858FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = ../AppDelegate.swift; sourceTree = "<group>"; };
-		455C8A5B1EDE692D004858FC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = ../ViewController.swift; sourceTree = "<group>"; };
 		455C8A601EDE692D004858FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		455C8A631EDE692D004858FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		455C8A651EDE692D004858FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -61,6 +60,7 @@
 		457547EE1EE163760008C995 /* ProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressHUD.h; sourceTree = "<group>"; };
 		457547EF1EE163760008C995 /* ProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressHUD.m; sourceTree = "<group>"; };
 		457547F81EE1665E0008C995 /* InstagramActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramActivityIndicator.swift; sourceTree = "<group>"; };
+		4597A6A31EF3E2F700DA88CC /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Demo_Code_Layout/ViewController.swift; sourceTree = SOURCE_ROOT; };
 		459AC7A91EE8E9B600DD1D69 /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		459AC7AC1EE8FD4E00DD1D69 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		459AC7AE1EE8FE6400DD1D69 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -176,7 +176,7 @@
 		455C8A6C1EDEAC1F004858FC /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				455C8A5B1EDE692D004858FC /* ViewController.swift */,
+				4597A6A31EF3E2F700DA88CC /* ViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -437,7 +437,7 @@
 				4510A5791EE7B1F700A6319A /* NotificationViewController.swift in Sources */,
 				4510A57C1EE7B22900A6319A /* SearchViewController.swift in Sources */,
 				455C8A721EDEB68E004858FC /* TabBarController.swift in Sources */,
-				455C8A5C1EDE692D004858FC /* ViewController.swift in Sources */,
+				4597A6A41EF3E2F700DA88CC /* ViewController.swift in Sources */,
 				455C8A5A1EDE692D004858FC /* AppDelegate.swift in Sources */,
 				459AC7B51EE94DB300DD1D69 /* HeaderProfile.swift in Sources */,
 				457547F11EE163760008C995 /* ProgressHUD.m in Sources */,
