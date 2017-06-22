@@ -30,6 +30,12 @@ class InfoViewController: UICollectionViewController {
         getImageUser()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if userProfile != nil {
+            self.navigationItem.title = self.userProfile?.username
+        }
+    }
     
     func setupCollectionView() {
         self.collectionView?.backgroundColor = .white
@@ -120,6 +126,8 @@ extension InfoViewController: UICollectionViewDelegateFlowLayout {
             let editProfile = EditProfileViewController()
             editProfile.userProfile = strongSelf.userProfile
             editProfile.imageView.image = headerViewCell.imgAvatar.image
+            editProfile.hidesBottomBarWhenPushed = true
+            strongSelf.navigationItem.title = ""
             strongSelf.navigationController?.navigationBar.tintColor = .black
             strongSelf.navigationController?.pushViewController(editProfile, animated: true)
         }
