@@ -83,7 +83,7 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
     
     //MARK:- Call API get list User
     private func getListUser() {
-        let userRef = ref.child("User")
+        let userRef = Constants.refUser
         ProgressHUD.show()
         userRef.observe(.childAdded, with: { [unowned self] (snapshot) in
             guard let value = snapshot.value as? Dictionary<String,AnyObject> else { return }

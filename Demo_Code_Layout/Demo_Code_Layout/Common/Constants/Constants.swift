@@ -17,4 +17,12 @@ struct Constants {
     static let refUser          = FIRDatabase.database().reference().child("User")
     static let refPost          = FIRDatabase.database().reference().child("Post")
     static let refComment       = FIRDatabase.database().reference().child("Comment")
+    static let refUserPost      = FIRDatabase.database().reference().child("UserPost")
+}
+
+struct TableName {
+    static let user                 = "User"
+    static let post                 = "Post"
+    static let comment              = "Comment"
+    static let userPost             = "UserPost"
 }

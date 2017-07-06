@@ -57,7 +57,7 @@ class InfoViewController: UICollectionViewController {
     func getCurrentUserData() {
         ProgressHUD.show()
         let uid = auth?.currentUser?.uid
-        let userRef = ref.child("User").child(uid!)
+        let userRef = Constants.refUser.child(uid!)
         userRef.observeSingleEvent(of: .value, with: {[unowned self] (snapshot) in
             guard let value = snapshot.value as? Dictionary<String,AnyObject> else { return }
             var user = User()
@@ -75,7 +75,7 @@ class InfoViewController: UICollectionViewController {
     
     
     private func getImageUser() {
-        let userPostRef = ref.child("UserPost").child((auth?.currentUser?.uid)!)
+        let userPostRef = Constants.refUserPost.child((auth?.currentUser?.uid)!)
         userPostRef.observe(.childAdded, with: { [weak self] (snapshot) in
             guard let strongSelf = self else { return }
             if let value = snapshot.value as? Dictionary<String,AnyObject> {

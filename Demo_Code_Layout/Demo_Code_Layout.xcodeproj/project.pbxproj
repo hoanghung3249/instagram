@@ -11,6 +11,7 @@
 		4510A5791EE7B1F700A6319A /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4510A5781EE7B1F700A6319A /* NotificationViewController.swift */; };
 		4510A57C1EE7B22900A6319A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4510A57B1EE7B22900A6319A /* SearchViewController.swift */; };
 		451677E01F0E14EB00767D79 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451677DF1F0E14EB00767D79 /* Constants.swift */; };
+		451677E21F0E231F00767D79 /* Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451677E11F0E231F00767D79 /* Firebase.swift */; };
 		4531F83C1EEB9F030045C08E /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4531F83B1EEB9F030045C08E /* Comment.swift */; };
 		4531F83E1EEBF5400045C08E /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4531F83D1EEBF5400045C08E /* SearchCell.swift */; };
 		453C83CE1EE9AD230003CEEE /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453C83CD1EE9AD230003CEEE /* EditProfileViewController.swift */; };
@@ -44,6 +45,7 @@
 		4510A5781EE7B1F700A6319A /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		4510A57B1EE7B22900A6319A /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		451677DF1F0E14EB00767D79 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		451677E11F0E231F00767D79 /* Firebase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Firebase.swift; sourceTree = "<group>"; };
 		4531F83B1EEB9F030045C08E /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		4531F83D1EEBF5400045C08E /* SearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		453C83CD1EE9AD230003CEEE /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 				459AC7AC1EE8FD4E00DD1D69 /* User.swift */,
 				459AC7AE1EE8FE6400DD1D69 /* Post.swift */,
 				4531F83B1EEB9F030045C08E /* Comment.swift */,
+				451677E11F0E231F00767D79 /* Firebase.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -447,6 +450,7 @@
 				45F242D11EF013CE002EBCC8 /* NotificationCell.swift in Sources */,
 				4510A5791EE7B1F700A6319A /* NotificationViewController.swift in Sources */,
 				4510A57C1EE7B22900A6319A /* SearchViewController.swift in Sources */,
+				451677E21F0E231F00767D79 /* Firebase.swift in Sources */,
 				455C8A721EDEB68E004858FC /* TabBarController.swift in Sources */,
 				4597A6A41EF3E2F700DA88CC /* ViewController.swift in Sources */,
 				455C8A5A1EDE692D004858FC /* AppDelegate.swift in Sources */,

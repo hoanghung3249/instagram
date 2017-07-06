@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Firebase
 import ACProgressHUD_Swift
 import Kingfisher
 import SwiftyJSON
@@ -17,9 +16,7 @@ class HomeViewController: UITableViewController {
         print("deinit home")
     }
     
-    let aut = FIRAuth.auth()
     let cellId = "cell"
-    let ref = FIRDatabase.database().reference()
     var curUser:User?
     
     var arrPost = [Post]()
@@ -30,17 +27,9 @@ class HomeViewController: UITableViewController {
         self.view.backgroundColor = UIColor.white
         self.setupNavigation()
         self.tabBarController?.tabBar.isTranslucent = false
-        tableView.register(HomeTableViewCell.self, forCellReuseIdentifier: cellId)
-        tableView.estimatedRowHeight = 350.0
-        tableView.separatorInset = UIEdgeInsets.zero
-        tableView.separatorStyle = .none
+        self.registerCell()
         getCurrentUser()
         getListPost()
-    }
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
     }
     
     //MARK:- Init functions
@@ -51,6 +40,13 @@ class HomeViewController: UITableViewController {
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.black
     }
     
+    
+    func registerCell() {
+        tableView.register(HomeTableViewCell.self, forCellReuseIdentifier: cellId)
+        tableView.estimatedRowHeight = 350.0
+        tableView.separatorInset = UIEdgeInsets.zero
+        tableView.separatorStyle = .none
+    }
     
     
     //MARK:- Action functions
@@ -72,39 +68,43 @@ class HomeViewController: UITableViewController {
     //MARK:- Support functions
     func getListPost() {
         ProgressHUD.show()
-        let postRef = Constants.refPost
-        postRef.observe(.childAdded, with: { [unowned self] (snapshot) in
-            guard let value = snapshot.value as? Dictionary<String,AnyObject> else { return }
-            let dataJSON = JSON(value)
-            var post = Post(dataJSON: dataJSON)
-            post.id = snapshot.key
-            if let currentUserID = FIRAuth.auth()?.currentUser?.uid {
-                if post.likes != nil {
-                    post.isLiked = post.likes![currentUserID] != nil
+        Firebase.shared.getData(TableName.post, .childAdded) { [weak self] (data, key, error) in
+            guard let strongSelf = self else { return }
+            if error == nil {
+                guard let data = data else { return }
+                let dataJSON = JSON(data)
+                var post = Post(dataJSON: dataJSON)
+                post.id = key!
+                if let currentUserID = aut?.currentUser?.uid {
+                    if post.likes != nil {
+                        post.isLiked = post.likes![currentUserID] != nil
+                    }
                 }
+                strongSelf.arrPost.insert(post, at: 0)
+                DispatchQueue.main.async {
+                    strongSelf.tableView.reloadData()
+                    ProgressHUD.dismiss()
+                }
+            } else {
+                ProgressHUD.showError(error!)
             }
-            self.arrPost.insert(post, at: 0)
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-                ProgressHUD.dismiss()
-            }
-        }) { (error) in
-            ProgressHUD.showError(error.localizedDescription)
         }
     }
     
     private func getCurrentUser() {
-        let userRef = Constants.refUser.child((aut?.currentUser?.uid)!)
-        userRef.observeSingleEvent(of: .value, with: { [unowned self] (snapshot) in
-            guard let value = snapshot.value as? Dictionary<String,AnyObject> else { return }
-            var currentUser = User()
-            currentUser.avatarUrl = value["avatar"] as? String ?? ""
-            currentUser.username = value["username"] as? String ?? ""
-            currentUser.email = value["email"] as? String ?? ""
-            currentUser.uid = self.aut?.currentUser?.uid ?? ""
-            self.curUser = currentUser
-        }) { (error) in
-            ProgressHUD.showError(error.localizedDescription)
+        Firebase.shared.getCurUser(TableName.user, (aut?.currentUser?.uid)!, .value) { [weak self] (data, key, error) in
+            guard let strongSelf = self else { return }
+            if error == nil {
+                guard let value = data else { return }
+                var currentUser = User()
+                currentUser.avatarUrl = value["avatar"] as? String ?? ""
+                currentUser.username = value["username"] as? String ?? ""
+                currentUser.email = value["email"] as? String ?? ""
+                currentUser.uid = aut?.currentUser?.uid ?? ""
+                strongSelf.curUser = currentUser
+            } else {
+                ProgressHUD.showError(error!)
+            }
         }
     }
     
