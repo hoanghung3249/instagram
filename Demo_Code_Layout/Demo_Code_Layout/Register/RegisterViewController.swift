@@ -294,7 +294,7 @@ class RegisterViewController: UIViewController {
                         value.updateValue(email as AnyObject, forKey: "email")
                         value.updateValue(name as AnyObject, forKey: "username")
                         value.updateValue(urlString as AnyObject, forKey: "avatar")
-                        let user = self.ref.child("User").child((user?.uid)!)
+                        let user = Constants.refUser.child((user?.uid)!)
                         user.setValue(value, withCompletionBlock: { (error, data) in
                             if error == nil {
                                 ProgressHUD.showSuccess()

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 struct Post {
     
@@ -19,4 +20,16 @@ struct Post {
     var likeCount: Int?
     var likes: Dictionary<String, Any>?
     var isLiked: Bool?
+    
+    
+    init(dataJSON:JSON) {
+        self.status = dataJSON["status"].string ?? ""
+        self.uid = dataJSON["uid"].string ?? ""
+        self.urlStatus = dataJSON["url"].string ?? ""
+        self.avatarUrl = dataJSON["urlAvatar"].string ?? ""
+        self.userName = dataJSON["username"].string ?? ""
+        self.likeCount = dataJSON["likeCount"].int ?? 0
+        self.likes = dataJSON["likes"].dictionary ?? [:]
+    }
+    
 }

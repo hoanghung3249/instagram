@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 import Kingfisher
 import Firebase
+import SwiftyJSON
 
 class HomeTableViewCell: UITableViewCell {
     
@@ -105,30 +106,8 @@ class HomeTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
-    var post:Post = Post() {
-        didSet {
-            self.labelName.text = post.userName
-            self.labelStatus.text = post.status
-            let urlAvatar = URL(string: post.avatarUrl)
-            let urlStatus = URL(string: post.urlStatus)
-            let imageName = post.likes == nil || !post.isLiked! ? "like" : "likeSelected"
-            btnLike.setImage(UIImage(named:imageName), for: .normal)
-            guard let count = post.likeCount else {
-                return
-            }
-            
-            if count != 0 {
-                btnShowLike.setTitle("\(count) Likes", for: .normal)
-            } else if post.likeCount == 0 {
-                btnShowLike.setTitle("Be the first to Like this", for: .normal)
-            }
-            DispatchQueue.main.async {
-                self.imgAvatar.kf.setImage(with: urlAvatar)
-                self.imgStatus.kf.setImage(with: urlStatus)
-            }
-        }
-    }
+    
+    var post:Post?
     
     var completionShowComment:((_ sender:UIButton)->())?
     
@@ -226,10 +205,33 @@ class HomeTableViewCell: UITableViewCell {
     }
     
     
+    func configCell(post:Post) {
+        self.post = post
+        self.labelName.text = post.userName
+        self.labelStatus.text = post.status
+        let urlAvatar = URL(string: post.avatarUrl)
+        let urlStatus = URL(string: post.urlStatus)
+        let imageName = post.likes == nil || !post.isLiked! ? "like" : "likeSelected"
+        btnLike.setImage(UIImage(named:imageName), for: .normal)
+        guard let count = post.likeCount else {
+            return
+        }
+        
+        if count != 0 {
+            btnShowLike.setTitle("\(count) Likes", for: .normal)
+        } else if post.likeCount == 0 {
+            btnShowLike.setTitle("Be the first to Like this", for: .normal)
+        }
+        DispatchQueue.main.async {
+            self.imgAvatar.kf.setImage(with: urlAvatar)
+            self.imgStatus.kf.setImage(with: urlStatus)
+        }
+    }
+    
+    
     
     func updateLike() {
-        let ref = FIRDatabase.database().reference()
-        let postRef = ref.child("Post").child(post.id)
+        let postRef = Constants.refPost.child((post?.id)!)
         handleLike(postRef)
     }
     
@@ -269,15 +271,9 @@ class HomeTableViewCell: UITableViewCell {
             }
             
             if let postDictionary = snapshot?.value as? [String:Any] {
-                var postUpdate = Post()
+                let dataJSON = JSON(postDictionary)
+                var postUpdate = Post(dataJSON: dataJSON)
                 postUpdate.id = (snapshot?.key)!
-                postUpdate.userName = postDictionary["username"] as? String ?? ""
-                postUpdate.uid = postDictionary["uid"] as? String ?? ""
-                postUpdate.likes = postDictionary["likes"] as? Dictionary<String,Any>
-                postUpdate.likeCount = postDictionary["likeCount"] as? Int
-                postUpdate.avatarUrl = postDictionary["urlAvatar"] as? String ?? ""
-                postUpdate.status = postDictionary["status"] as? String ?? ""
-                postUpdate.urlStatus = postDictionary["url"] as? String ?? ""
                 if let currentUserID = FIRAuth.auth()?.currentUser?.uid {
                     if postUpdate.likes != nil {
                         postUpdate.isLiked = postUpdate.likes![currentUserID] != nil

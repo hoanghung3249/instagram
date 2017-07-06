@@ -45,6 +45,7 @@ PODS:
   - Pastel (0.2.0)
   - Sharaku (1.0.2)
   - SnapKit (3.2.0)
+  - SwiftyJSON (3.1.4)
 
 DEPENDENCIES:
   - ACProgressHUD-Swift (~> 1.2)
@@ -57,6 +58,7 @@ DEPENDENCIES:
   - Pastel
   - Sharaku
   - SnapKit (~> 3.2.0)
+  - SwiftyJSON
 
 SPEC CHECKSUMS:
   ACProgressHUD-Swift: a08e699b2d8b3f3528d77c021ad6a326bc16f76d
@@ -74,7 +76,8 @@ SPEC CHECKSUMS:
   Pastel: f3d9a543a8bcdc385bd432513d3dcc0476276732
   Sharaku: c18de569fc99f6e936f46ca812b571826cc658a7
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
+  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 3f6f3aaa189bbd3b02a7fc00fd0207d8c1931f05
+PODFILE CHECKSUM: 86812b636c8a7b74dca0274bc69db8fef56f94c3
 
 COCOAPODS: 1.2.1

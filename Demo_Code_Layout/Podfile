@@ -13,4 +13,5 @@ target 'Demo_Code_Layout' do
    pod "Pastel"
    pod "Sharaku"
    pod 'Kingfisher', '~> 3.0'
+   pod 'SwiftyJSON'
 end

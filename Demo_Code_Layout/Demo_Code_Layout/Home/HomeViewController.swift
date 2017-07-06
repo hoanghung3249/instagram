@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import ACProgressHUD_Swift
 import Kingfisher
+import SwiftyJSON
 
 class HomeViewController: UITableViewController {
     deinit {
@@ -71,18 +72,12 @@ class HomeViewController: UITableViewController {
     //MARK:- Support functions
     func getListPost() {
         ProgressHUD.show()
-        let postRef = ref.child("Post")
+        let postRef = Constants.refPost
         postRef.observe(.childAdded, with: { [unowned self] (snapshot) in
             guard let value = snapshot.value as? Dictionary<String,AnyObject> else { return }
-            var post = Post()
+            let dataJSON = JSON(value)
+            var post = Post(dataJSON: dataJSON)
             post.id = snapshot.key
-            post.status = value["status"] as? String ?? ""
-            post.uid = value["uid"] as? String ?? ""
-            post.urlStatus = value["url"] as? String ?? ""
-            post.avatarUrl = value["urlAvatar"] as? String ?? ""
-            post.userName = value["username"] as? String ?? ""
-            post.likeCount = value["likeCount"] as? Int ?? 0
-            post.likes = value["likes"] as? Dictionary<String,Any>
             if let currentUserID = FIRAuth.auth()?.currentUser?.uid {
                 if post.likes != nil {
                     post.isLiked = post.likes![currentUserID] != nil
@@ -99,7 +94,7 @@ class HomeViewController: UITableViewController {
     }
     
     private func getCurrentUser() {
-        let userRef = ref.child("User").child((aut?.currentUser?.uid)!)
+        let userRef = Constants.refUser.child((aut?.currentUser?.uid)!)
         userRef.observeSingleEvent(of: .value, with: { [unowned self] (snapshot) in
             guard let value = snapshot.value as? Dictionary<String,AnyObject> else { return }
             var currentUser = User()
@@ -133,7 +128,7 @@ extension HomeViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! HomeTableViewCell
         if arrPost.count != 0 {
             let post = arrPost[indexPath.row]
-            cell.post = post
+            cell.configCell(post: post)
         }
         
         cell.completionShowComment = { [unowned self] sender in

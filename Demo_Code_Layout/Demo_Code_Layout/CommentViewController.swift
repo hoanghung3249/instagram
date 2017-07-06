@@ -175,7 +175,7 @@ class CommentViewController: UIViewController {
     
     private func loadComment() {
         ProgressHUD.show()
-        let postComment = ref.child("Comment").child(postID!)
+        let postComment = Constants.refComment.child(postID!)
         postComment.observe(.childAdded, with: { [unowned self] (snapshot) in
             guard let value = snapshot.value as? Dictionary<String,AnyObject> else {
                 ProgressHUD.dismiss()
@@ -219,7 +219,7 @@ class CommentViewController: UIViewController {
     
     private func uploadComment(_ commentString:String) {
         ProgressHUD.show()
-        let commentRef = ref.child("Comment").child(postID!).childByAutoId()
+        let commentRef = Constants.refComment.child(postID!).childByAutoId()
         var param:Dictionary<String,AnyObject> = Dictionary()
         param.updateValue(commentString as AnyObject, forKey: "comment")
         param.updateValue(curUser?.avatarUrl as AnyObject, forKey: "avatar")
