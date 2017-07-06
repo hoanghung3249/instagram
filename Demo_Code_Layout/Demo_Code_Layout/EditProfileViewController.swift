@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import Firebase
 
 class EditProfileViewController: UIViewController {
     
@@ -37,6 +38,13 @@ class EditProfileViewController: UIViewController {
         return button
     }()
     
+    let containtView:UIView =  {
+        let view:UIView = UIView()
+        view.backgroundColor = .gray
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     //MARK:- Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +58,7 @@ class EditProfileViewController: UIViewController {
     //MARK:- Support functions
     private func addSubview() {
         self.view.addSubview(vwHeader)
+        self.view.addSubview(containtView)
         self.vwHeader.addSubview(imageView)
         self.vwHeader.addSubview(btnChangePhoto)
     }
@@ -76,6 +85,13 @@ class EditProfileViewController: UIViewController {
             make.centerX.equalTo(vwHeader.snp.centerX)
             make.width.equalTo(200)
             make.bottom.equalTo(vwHeader.snp.bottom).offset(-10)
+        }
+        
+        self.containtView.snp.makeConstraints { (make) in
+            make.top.equalTo(self.vwHeader.snp.bottom).offset(0)
+            make.left.equalTo(self.vwHeader.snp.left)
+            make.right.equalTo(self.vwHeader.snp.right)
+            make.bottom.equalTo(self.view.snp.bottom)
         }
         
         self.view.layoutIfNeeded()

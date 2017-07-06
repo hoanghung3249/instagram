@@ -270,6 +270,7 @@ class HomeTableViewCell: UITableViewCell {
             
             if let postDictionary = snapshot?.value as? [String:Any] {
                 var postUpdate = Post()
+                postUpdate.id = (snapshot?.key)!
                 postUpdate.userName = postDictionary["username"] as? String ?? ""
                 postUpdate.uid = postDictionary["uid"] as? String ?? ""
                 postUpdate.likes = postDictionary["likes"] as? Dictionary<String,Any>
