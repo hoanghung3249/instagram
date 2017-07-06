@@ -8,8 +8,8 @@
 
 import UIKit
 import SnapKit
-import Firebase
 import IQKeyboardManagerSwift
+import SwiftyJSON
 
 class CommentViewController: UIViewController {
     
@@ -18,8 +18,6 @@ class CommentViewController: UIViewController {
     var postID:String?
     var arrComment:[Comment] = []
     
-    let ref = FIRDatabase.database().reference()
-    let aut = FIRAuth.auth()?.currentUser
     var curUser:User?
     
     
@@ -175,23 +173,23 @@ class CommentViewController: UIViewController {
     
     private func loadComment() {
         ProgressHUD.show()
-        let postComment = Constants.refComment.child(postID!)
-        postComment.observe(.childAdded, with: { [unowned self] (snapshot) in
-            guard let value = snapshot.value as? Dictionary<String,AnyObject> else {
-                ProgressHUD.dismiss()
-                return
+        Firebase.shared.getChildData(TableName.comment, postID!, .childAdded) { [weak self] (data, key, error) in
+            guard let strongSelf = self else { return }
+            if error == nil {
+                guard let value = data else {
+                    ProgressHUD.dismiss()
+                    return
+                }
+                let dataJSON = JSON(value)
+                let comment = Comment(dataJSON: dataJSON)
+                strongSelf.arrComment.append(comment)
+                DispatchQueue.main.async {
+                    strongSelf.tableView.reloadData()
+                    ProgressHUD.dismiss()
+                }
+            } else {
+                ProgressHUD.showError(error)
             }
-            var comment = Comment()
-            comment.avatarUrl = value["avatar"] as? String ?? ""
-            comment.comment = value["comment"] as? String ?? ""
-            comment.username = value["username"] as? String ?? ""
-            self.arrComment.append(comment)
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-                ProgressHUD.dismiss()
-            }
-        }) { (error) in
-            ProgressHUD.showError(error.localizedDescription)
         }
         ProgressHUD.dismiss()
     }
@@ -219,17 +217,16 @@ class CommentViewController: UIViewController {
     
     private func uploadComment(_ commentString:String) {
         ProgressHUD.show()
-        let commentRef = Constants.refComment.child(postID!).childByAutoId()
         var param:Dictionary<String,AnyObject> = Dictionary()
         param.updateValue(commentString as AnyObject, forKey: "comment")
         param.updateValue(curUser?.avatarUrl as AnyObject, forKey: "avatar")
         param.updateValue(curUser?.username as AnyObject, forKey: "username")
-        commentRef.setValue(param) { [unowned self] (error, data) in
+        Firebase.shared.addNewData(TableName.comment, postID!, param) { (data, error) in
             if error == nil {
                 self.txtComment.text = ""
                 ProgressHUD.dismiss()
             } else {
-                ProgressHUD.showError(error?.localizedDescription)
+                ProgressHUD.showError(error)
             }
         }
     }
@@ -247,7 +244,7 @@ extension CommentViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CommentCell
         if arrComment.count != 0 {
             let userComment = self.arrComment[indexPath.row]
-            cell.comment = userComment
+            cell.configCell(comment: userComment)
         }
         return cell
     }

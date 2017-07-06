@@ -46,18 +46,6 @@ class CommentCell: UITableViewCell {
         return view
     }()
     
-    var comment = Comment() {
-        didSet {
-            self.lblName.text = comment.username
-            self.lblComment.text = comment.comment
-            let url = URL(string: comment.avatarUrl!)
-            DispatchQueue.main.async {
-                self.imgAvatar.kf.setImage(with: url)
-            }
-        }
-    }
-    
-
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -65,6 +53,15 @@ class CommentCell: UITableViewCell {
         self.setupUI()
     }
     
+    
+    func configCell(comment:Comment) {
+        self.lblName.text = comment.username
+        self.lblComment.text = comment.comment
+        let url = URL(string: comment.avatarUrl!)
+        DispatchQueue.main.async {
+            self.imgAvatar.kf.setImage(with: url)
+        }
+    }
     
     func addSubview() {
         self.contentView.addSubview(imgAvatar)

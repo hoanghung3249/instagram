@@ -56,38 +56,40 @@ class InfoViewController: UICollectionViewController {
     //MARK:- Support functions
     func getCurrentUserData() {
         ProgressHUD.show()
-        let uid = auth?.currentUser?.uid
-        let userRef = Constants.refUser.child(uid!)
-        userRef.observeSingleEvent(of: .value, with: {[unowned self] (snapshot) in
-            guard let value = snapshot.value as? Dictionary<String,AnyObject> else { return }
-            var user = User()
-            user.uid = snapshot.key
-            user.email = value["email"] as? String ?? ""
-            user.username = value["username"] as? String ?? ""
-            user.avatarUrl = value["avatar"] as? String ?? ""
-            self.userProfile = user
-            self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 15)]
-            self.navigationItem.title = self.userProfile?.username
-        }) { (error) in
-            ProgressHUD.showError(error.localizedDescription)
+        Firebase.shared.getCurUser(TableName.user, (aut?.currentUser?.uid)!, .value) { [weak self] (data, key, error) in
+            guard let strongSelf = self else { return }
+            if error == nil {
+                guard let value = data else { return }
+                var user = User()
+                user.uid = key!
+                user.email = value["email"] as? String ?? ""
+                user.username = value["username"] as? String ?? ""
+                user.avatarUrl = value["avatar"] as? String ?? ""
+                strongSelf.userProfile = user
+                strongSelf.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 15)]
+                strongSelf.navigationItem.title = strongSelf.userProfile?.username
+            } else {
+                ProgressHUD.showError(error)
+            }
         }
     }
     
     
     private func getImageUser() {
-        let userPostRef = Constants.refUserPost.child((auth?.currentUser?.uid)!)
-        userPostRef.observe(.childAdded, with: { [weak self] (snapshot) in
+        Firebase.shared.getChildData(TableName.userPost, (aut?.currentUser?.uid)!, .childAdded) { [weak self] (data, key, error) in
             guard let strongSelf = self else { return }
-            if let value = snapshot.value as? Dictionary<String,AnyObject> {
-                let urlString = value["urlString"] as? String ?? ""
-                strongSelf.arrUrlString.insert(urlString, at: 0)
-                DispatchQueue.main.async {
-                    strongSelf.collectionView?.reloadData()
-                    ProgressHUD.dismiss()
+            if error == nil {
+                if let value = data {
+                    let urlString = value["urlString"] as? String ?? ""
+                    strongSelf.arrUrlString.insert(urlString, at: 0)
+                    DispatchQueue.main.async {
+                        strongSelf.collectionView?.reloadData()
+                        ProgressHUD.dismiss()
+                    }
                 }
+            } else {
+                ProgressHUD.showError(error)
             }
-        }) { (error) in
-            ProgressHUD.showError(error.localizedDescription)
         }
     }
 }

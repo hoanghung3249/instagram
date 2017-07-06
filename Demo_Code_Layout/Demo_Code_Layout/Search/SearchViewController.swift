@@ -8,7 +8,6 @@
 
 import UIKit
 import SnapKit
-import Firebase
 
 class SearchViewController: UITableViewController, UISearchBarDelegate {
     
@@ -17,13 +16,13 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
     let cellId = "cellId"
     
     
-    let ref = FIRDatabase.database().reference()
     var arrUser = [User]()
     var arrFilterUser = [User]()
     
     //MARK:- Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.isTranslucent = false
         setupSearchBar()
         setupTableview()
         self.getListUser()
@@ -83,23 +82,25 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
     
     //MARK:- Call API get list User
     private func getListUser() {
-        let userRef = Constants.refUser
         ProgressHUD.show()
-        userRef.observe(.childAdded, with: { [unowned self] (snapshot) in
-            guard let value = snapshot.value as? Dictionary<String,AnyObject> else { return }
-            var userProfile = User()
-            userProfile.uid = snapshot.key
-            userProfile.email = value["email"] as? String ?? ""
-            userProfile.username = value["username"] as? String ?? ""
-            userProfile.avatarUrl = value["avatar"] as? String ?? ""
-            self.arrUser.append(userProfile)
-            
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-                ProgressHUD.dismiss()
+        Firebase.shared.getData(TableName.user, .childAdded) { [weak self] (data, key, error) in
+            guard let strongSelf = self else { return }
+            if error == nil {
+                guard let data = data else { return }
+                var userProfile = User()
+                userProfile.uid = key!
+                userProfile.email = data["email"] as? String ?? ""
+                userProfile.username = data["username"] as? String ?? ""
+                userProfile.avatarUrl = data["avatar"] as? String ?? ""
+                strongSelf.arrUser.append(userProfile)
+                
+                DispatchQueue.main.async {
+                    strongSelf.tableView.reloadData()
+                    ProgressHUD.dismiss()
+                }
+            } else {
+                ProgressHUD.showError(error!)
             }
-        }) { (error) in
-            ProgressHUD.showError(error.localizedDescription)
         }
     }
 
@@ -123,10 +124,10 @@ extension SearchViewController {
         
         if isSearching {
             let userProfile = self.arrFilterUser[indexPath.row]
-            cell.user = userProfile
+            cell.configCell(user: userProfile)
         } else {
             let userProfile = self.arrUser[indexPath.row]
-            cell.user = userProfile
+            cell.configCell(user: userProfile)
         }
         
         return cell

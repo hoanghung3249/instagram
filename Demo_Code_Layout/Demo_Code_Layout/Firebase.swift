@@ -24,12 +24,30 @@ struct Firebase {
         }
     }
     
+    func getChildData(_ tableName:String,_ child:String,_ eventType:FIRDataEventType, completion: @escaping (_ data:Dictionary<String,AnyObject>?,_ key:String?,_ error:String?)->()) {
+        ref.child(tableName).child(child).observe(eventType, with: { (snapshot) in
+            completion(snapshot.value as? Dictionary<String, AnyObject>, snapshot.key, nil)
+        }) { (error) in
+            completion(nil, nil, error.localizedDescription)
+        }
+    }
+    
     func getCurUser(_ tableName:String,_ uid:String,_ eventType:FIRDataEventType, completion: @escaping (_ data:Dictionary<String,AnyObject>?,_ key:String?,_ error:String?)->()) {
         ref.child(tableName).child(uid).observeSingleEvent(of: eventType, with: { (snapshot) in
             completion(snapshot.value as? Dictionary<String,AnyObject>, snapshot.key, nil)
         }) { (error) in
             completion(nil, nil, error.localizedDescription)
         }
+    }
+    
+    func addNewData(_ tableName:String,_ child:String?,_ value:[String:AnyObject], completion: @escaping (_ data:AnyObject?,_ error:String?)->()) {
+        ref.child(tableName).child(child!).childByAutoId().setValue(value, withCompletionBlock: { (error, data) in
+            if error == nil {
+                completion(data, nil)
+            } else {
+                completion(nil, error?.localizedDescription)
+            }
+        })
     }
     
 }

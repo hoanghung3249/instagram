@@ -7,12 +7,19 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 struct Comment {
     
-    var id:String?
+    var id:String = ""
     var username:String?
     var avatarUrl:String?
     var comment:String?
+    
+    init(dataJSON:JSON) {
+        self.username = dataJSON["username"].string ?? ""
+        self.avatarUrl = dataJSON["avatar"].string ?? ""
+        self.comment = dataJSON["comment"].string ?? ""
+    }
     
 }

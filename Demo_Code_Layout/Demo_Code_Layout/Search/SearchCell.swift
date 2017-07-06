@@ -38,22 +38,20 @@ class SearchCell: UITableViewCell {
         return view
     }()
     
-    var user = User() {
-        didSet {
-            self.lblName.text = user.username
-            let imgUrl = URL(string: user.avatarUrl)
-            DispatchQueue.main.async {
-                self.imgAvatar.kf.setImage(with: imgUrl)
-            }
-        }
-    }
-    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubview()
         setupUI()
     }
     
+    
+    func configCell(user:User) {
+        self.lblName.text = user.username
+        let imgUrl = URL(string: user.avatarUrl)
+        DispatchQueue.main.async {
+            self.imgAvatar.kf.setImage(with: imgUrl)
+        }
+    }
     
     func addSubview(){
         self.contentView.addSubview(imgAvatar)
