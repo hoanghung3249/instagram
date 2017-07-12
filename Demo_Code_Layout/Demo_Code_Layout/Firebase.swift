@@ -15,6 +15,7 @@ struct Firebase {
     
     static let shared = Firebase()
     let ref = FIRDatabase.database().reference()
+    let storage = FIRStorage.storage().reference(forURL: "gs://instagram-8a16d.appspot.com/")
     
     func getData(_ tableName:String,_ eventType:FIRDataEventType, completion: @escaping (_ data:Dictionary<String,AnyObject>?,_ key:String?,_ error:String?)->()) {
         ref.child(tableName).observe(eventType, with: { (snapshot) in
@@ -50,4 +51,18 @@ struct Firebase {
         })
     }
     
+    func uploadImage(_ imgUpload:UIImage,_ child:String, completion: @escaping (_ imgUrl:String?,_ error:String?)->()) {
+        let imageData = UIImagePNGRepresentation(imgUpload)
+        let imgName = UUID().uuidString
+        let imgStorage = self.storage.child(child)
+        let newImg = imgStorage.child(imgName)
+        newImg.put(imageData!, metadata: nil) { (metadata, error) in
+            if error == nil {
+                guard let urlString = metadata?.downloadURL()?.absoluteString else { return }
+                completion(urlString, nil)
+            } else {
+                completion(nil, error?.localizedDescription)
+            }
+        }
+    }
 }

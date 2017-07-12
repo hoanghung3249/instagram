@@ -120,7 +120,7 @@ extension InfoViewController: UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let headerViewCell = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "HeaderProfile", for: indexPath) as! HeaderProfile
         if let user = self.userProfile {
-            headerViewCell.user = user
+            headerViewCell.configHeader(user: user)
         }
         
         headerViewCell.completionEdit = { [weak self] in

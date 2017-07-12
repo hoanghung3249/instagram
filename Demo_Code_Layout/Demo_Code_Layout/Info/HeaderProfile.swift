@@ -11,15 +11,15 @@ import Kingfisher
 
 class HeaderProfile: UICollectionReusableView {
     
-    var user:User? {
-        didSet {
-            self.lblName.text = user?.username
-            let imgAvatar = URL(string: (user?.avatarUrl)!)
-            DispatchQueue.main.async {
-                self.imgAvatar.kf.setImage(with: imgAvatar)
-            }
-        }
-    }
+//    var user:User? {
+//        didSet {
+//            self.lblName.text = user?.username
+//            let imgAvatar = URL(string: (user?.avatarUrl)!)
+//            DispatchQueue.main.async {
+//                self.imgAvatar.kf.setImage(with: imgAvatar)
+//            }
+//        }
+//    }
     
     var completionEdit:(()->())?
     
@@ -108,6 +108,14 @@ class HeaderProfile: UICollectionReusableView {
         }
     }
     
+    
+    func configHeader(user:User) {
+        self.lblName.text = user.username
+        let imgAvatar = URL(string: (user.avatarUrl))
+        DispatchQueue.main.async {
+            self.imgAvatar.kf.setImage(with: imgAvatar)
+        }
+    }
     
     
     func editProfile() {
