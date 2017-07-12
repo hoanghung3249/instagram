@@ -42,16 +42,26 @@ struct Firebase {
     }
     
     func addNewData(_ tableName:String,_ child:String?,_ value:[String:AnyObject], completion: @escaping (_ data:AnyObject?,_ error:String?)->()) {
-        ref.child(tableName).child(child!).childByAutoId().setValue(value, withCompletionBlock: { (error, data) in
-            if error == nil {
-                completion(data, nil)
-            } else {
-                completion(nil, error?.localizedDescription)
-            }
-        })
+        if child != nil {
+            ref.child(tableName).child(child!).childByAutoId().setValue(value, withCompletionBlock: { (error, data) in
+                if error == nil {
+                    completion(data, nil)
+                } else {
+                    completion(nil, error?.localizedDescription)
+                }
+            })
+        } else {
+            ref.child(tableName).childByAutoId().setValue(value, withCompletionBlock: { (error, data) in
+                if error == nil {
+                    completion(data, nil)
+                } else {
+                    completion(nil, error?.localizedDescription)
+                }
+            })
+        }
     }
     
-    func uploadImage(_ imgUpload:UIImage,_ child:String, completion: @escaping (_ imgUrl:String?,_ error:String?)->()) {
+    func uploadImage(_ imgUpload:UIImage,_ child:String, completion: @escaping (_ imgUrl:String?,_ imgName:String?,_ error:String?)->()) {
         let imageData = UIImagePNGRepresentation(imgUpload)
         let imgName = UUID().uuidString
         let imgStorage = self.storage.child(child)
@@ -59,9 +69,9 @@ struct Firebase {
         newImg.put(imageData!, metadata: nil) { (metadata, error) in
             if error == nil {
                 guard let urlString = metadata?.downloadURL()?.absoluteString else { return }
-                completion(urlString, nil)
+                completion(urlString, imgName, nil)
             } else {
-                completion(nil, error?.localizedDescription)
+                completion(nil, nil,error?.localizedDescription)
             }
         }
     }

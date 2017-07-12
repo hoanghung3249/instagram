@@ -169,37 +169,39 @@ class CameraViewController: UIViewController {
     }
     
     fileprivate func uploadImage(_ imgSelect:UIImage,_ status:String) {
-        let imageData = UIImagePNGRepresentation(imgSelect)
-        let imgName = UUID().uuidString
-        let profileImgStorage = self.storage.child("ImageStatus/")
-        let newImg = profileImgStorage.child(imgName)
-        newImg.put(imageData!, metadata: nil) { [weak self] (metadata, error) in
+        Firebase.shared.uploadImage(imgSelect, "ImageStatus/") { [weak self] (urlString, imgName, error) in
             guard let strongSelf = self else { return }
             if error == nil {
-                guard let urlString = metadata?.downloadURL()?.absoluteString else { return }
-                strongSelf.uploadData(urlString, imgName,status)
+                strongSelf.uploadData(urlString!, imgName!, status)
             } else {
-                ProgressHUD.showError(error?.localizedDescription)
+                ProgressHUD.showError(error!)
             }
         }
     }
     
     
     private func uploadData(_ urlString:String,_ imgName:String,_ status:String) {
-        let postRef = ref.child("Post").childByAutoId()
+//        let postRef = ref.child("Post").childByAutoId()
         var param:Dictionary<String,AnyObject> = Dictionary()
         param.updateValue(urlString as AnyObject, forKey: "url")
         param.updateValue(self.auth?.currentUser?.uid as AnyObject, forKey: "uid")
         param.updateValue(self.userName as AnyObject, forKey: "username")
         param.updateValue(status as AnyObject, forKey: "status")
         param.updateValue(self.urlAvatar as AnyObject, forKey: "urlAvatar")
-        postRef.setValue(param) { [unowned self] (error, data) in
+        Firebase.shared.addNewData(TableName.post, nil, param) { [unowned self] (data, error) in
             if error == nil {
-                self.uploadDataUser(urlString,imgName)
+                self.uploadDataUser(urlString, imgName)
             } else {
-                ProgressHUD.showError(error?.localizedDescription)
+                ProgressHUD.showError(error!)
             }
         }
+//        postRef.setValue(param) { [unowned self] (error, data) in
+//            if error == nil {
+//                self.uploadDataUser(urlString,imgName)
+//            } else {
+//                ProgressHUD.showError(error?.localizedDescription)
+//            }
+//        }
     }
     
     
