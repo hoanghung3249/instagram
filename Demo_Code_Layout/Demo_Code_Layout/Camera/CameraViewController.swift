@@ -121,7 +121,7 @@ class CameraViewController: UIViewController {
         }
         
         self.buttonShare.snp.makeConstraints { (make) in
-            make.bottom.equalTo((self.tabBarController?.tabBar.frame.height)!).offset(-49)
+            make.bottom.equalTo((self.tabBarController?.tabBar.frame.height)!).offset(0)
             make.left.equalTo(self.view.snp.left)
             make.right.equalTo(self.view.snp.right)
             make.height.equalTo(50)
@@ -181,7 +181,6 @@ class CameraViewController: UIViewController {
     
     
     private func uploadData(_ urlString:String,_ imgName:String,_ status:String) {
-//        let postRef = ref.child("Post").childByAutoId()
         var param:Dictionary<String,AnyObject> = Dictionary()
         param.updateValue(urlString as AnyObject, forKey: "url")
         param.updateValue(self.auth?.currentUser?.uid as AnyObject, forKey: "uid")
@@ -195,13 +194,6 @@ class CameraViewController: UIViewController {
                 ProgressHUD.showError(error!)
             }
         }
-//        postRef.setValue(param) { [unowned self] (error, data) in
-//            if error == nil {
-//                self.uploadDataUser(urlString,imgName)
-//            } else {
-//                ProgressHUD.showError(error?.localizedDescription)
-//            }
-//        }
     }
     
     
