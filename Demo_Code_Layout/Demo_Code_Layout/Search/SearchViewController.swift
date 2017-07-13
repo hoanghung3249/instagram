@@ -22,7 +22,6 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
     //MARK:- Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.isTranslucent = false
         setupSearchBar()
         setupTableview()
         self.getListUser()

@@ -33,6 +33,7 @@ class TabBarController: UITabBarController {
         
         let search = SearchViewController()
         let navSearch = UINavigationController(rootViewController: search)
+        navSearch.navigationBar.backgroundColor = .white
         navSearch.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "Search"), selectedImage: UIImage(named: "Search_Selected"))
 
         let layout = UICollectionViewFlowLayout()

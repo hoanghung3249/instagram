@@ -68,6 +68,10 @@ class InfoViewController: UICollectionViewController {
                 strongSelf.userProfile = user
                 strongSelf.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 15)]
                 strongSelf.navigationItem.title = strongSelf.userProfile?.username
+                DispatchQueue.main.async {
+                    strongSelf.collectionView?.reloadData()
+                    ProgressHUD.dismiss()
+                }
             } else {
                 ProgressHUD.showError(error)
             }

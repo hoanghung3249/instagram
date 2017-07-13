@@ -110,6 +110,7 @@ class HomeTableViewCell: UITableViewCell {
     var post:Post?
     
     var completionShowComment:((_ sender:UIButton)->())?
+    var completionUpdatePost:((_ post:Post)->())?
     
     //MAKR:- Init functions
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -300,6 +301,8 @@ class HomeTableViewCell: UITableViewCell {
         } else if post.likeCount == 0 {
             btnShowLike.setTitle("Be the first to Like this", for: .normal)
         }
+        guard let completion = completionUpdatePost else { return }
+        completion(post)
     }
     
     

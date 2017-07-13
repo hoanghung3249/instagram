@@ -141,6 +141,10 @@ extension HomeViewController {
                 self.navigationController?.pushViewController(commentVC, animated: true)
             }
         }
+        cell.completionUpdatePost = { [unowned self] post in
+            self.arrPost[indexPath.row] = post
+        }
+        
         cell.selectionStyle = .none
         
         return cell
