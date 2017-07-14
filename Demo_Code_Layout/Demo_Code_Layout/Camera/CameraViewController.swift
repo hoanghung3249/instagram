@@ -198,7 +198,7 @@ class CameraViewController: UIViewController {
     
     
     private func uploadDataUser(_ urlString:String,_ imgName:String) {
-        let userPost = ref.child("UserPost").child((auth?.currentUser?.uid)!).child(imgName)
+        let userPost = ref.child("UserPost").child((self.auth?.currentUser?.uid)!).child(imgName)
         var param:Dictionary<String,AnyObject> = Dictionary()
         param.updateValue(urlString as AnyObject, forKey: "urlString")
         userPost.setValue(param) { (error, data) in
@@ -243,7 +243,8 @@ extension CameraViewController: UIImagePickerControllerDelegate, UINavigationCon
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            self.imageSelected = image
+            self.imageSelected = image.resized(toWidth: 414)
+            
         }
         
         dismiss(animated: true) { [weak self] in
@@ -251,6 +252,23 @@ extension CameraViewController: UIImagePickerControllerDelegate, UINavigationCon
             strongSelf.editPhoto(imageEdit: strongSelf.imageSelected!)
         }
     }
+    
+    
+    private func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
+        
+        let scale = newWidth / image.size.width
+        let newHeight = image.size.height * scale
+        
+        UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
+        
+        
+        image.draw(in: CGRect(x: 0, y: 0,width: newWidth, height: newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
+    }
+    
     
 }
 

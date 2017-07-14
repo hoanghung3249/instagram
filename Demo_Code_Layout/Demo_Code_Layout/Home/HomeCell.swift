@@ -41,13 +41,18 @@ class HomeCell: ASCellNode {
         //Setup Data
         self.labelName = ASTextNode()
         self.labelName.attributedText = NSAttributedString(string: post.userName, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 13)])
+        
         self.imgAvatar = ASNetworkImageNode()
         imgAvatar.cornerRadius = 25
         imgAvatar.clipsToBounds = true
-        imgAvatar.url = URL(string: post.avatarUrl)
+        imgAvatar.contentMode = .scaleAspectFill
+        imgAvatar?.url = URL(string: post.avatarUrl)
+        
         
         self.imgStatus = ASNetworkImageNode()
-        imgStatus.url = URL(string: post.urlStatus)
+        imgStatus.contentMode = .scaleAspectFill
+        imgStatus?.url = URL(string: post.urlStatus)
+        
         
         self.btnLike = ASButtonNode()
         btnLike.addTarget(self, action: #selector(updateLike), forControlEvents: .touchUpInside)

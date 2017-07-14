@@ -64,8 +64,9 @@ struct Firebase {
     func uploadImage(_ imgUpload:UIImage,_ child:String, completion: @escaping (_ imgUrl:String?,_ imgName:String?,_ error:String?)->()) {
         let imageData = UIImagePNGRepresentation(imgUpload)
         let imgName = UUID().uuidString
+        let name = imgName + ".jpg"
         let imgStorage = self.storage.child(child)
-        let newImg = imgStorage.child(imgName)
+        let newImg = imgStorage.child(name)
         newImg.put(imageData!, metadata: nil) { (metadata, error) in
             if error == nil {
                 guard let urlString = metadata?.downloadURL()?.absoluteString else { return }
