@@ -10,5 +10,6 @@
 #define Demo_Code_Layout_Bridging_Header_h
 
 #import "ProgressHUD.h"
+#import <AsyncDisplayKit/AsyncDisplayKit.h>
 
 #endif /* Demo_Code_Layout_Bridging_Header_h */
