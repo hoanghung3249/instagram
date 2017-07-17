@@ -47,12 +47,13 @@ class HomeCell: ASCellNode {
         imgAvatar.clipsToBounds = true
         imgAvatar.contentMode = .scaleAspectFill
         imgAvatar?.url = URL(string: post.avatarUrl)
+        imgAvatar.shouldRenderProgressImages = true
         
         
         self.imgStatus = ASNetworkImageNode()
         imgStatus.contentMode = .scaleAspectFill
         imgStatus?.url = URL(string: post.urlStatus)
-        
+        imgStatus.shouldRenderProgressImages = true
         
         self.btnLike = ASButtonNode()
         btnLike.addTarget(self, action: #selector(updateLike), forControlEvents: .touchUpInside)

@@ -96,11 +96,13 @@ class HomeViewController: ASViewController<ASDisplayNode> {
                         post.isLiked = post.likes![currentUserID] != nil
                     }
                 }
-//                strongSelf.arrPost.insert(post, at: 0)
-                arrPostTmp.insert(post, at: 0)
+                strongSelf.arrPost.insert(post, at: 0)
+//                arrPostTmp.insert(post, at: 0)
+
+                strongSelf.tableNode.insertRows(at: [IndexPath(row:0, section:0)], with: .none)
                 DispatchQueue.main.async {
 //                    strongSelf.tableView.reloadData()
-                    strongSelf.insertDataInTableView(arrPostTmp)
+//                    strongSelf.insertDataInTableView(arrPostTmp)
                     ProgressHUD.dismiss()
                 }
             } else {

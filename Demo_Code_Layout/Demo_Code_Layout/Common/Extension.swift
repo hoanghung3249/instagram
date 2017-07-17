@@ -65,3 +65,17 @@ extension UIImage {
         return UIGraphicsGetImageFromCurrentImageContext()
     }
 }
+
+extension UIViewController {
+    
+    func tapToHideKeyboard(){
+        let tapOutside = UITapGestureRecognizer(target: self, action: #selector(self.tap(_:)))
+        self.view.addGestureRecognizer(tapOutside)
+    }
+    
+    func tap(_ gesture: UITapGestureRecognizer){
+        self.view.endEditing(true)
+    }
+    
+}
+
