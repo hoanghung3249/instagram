@@ -12,7 +12,7 @@ import Kingfisher
 import SwiftyJSON
 import AsyncDisplayKit
 
-class HomeViewController: ASViewController<ASDisplayNode> {
+final class HomeViewController: ASViewController<ASDisplayNode> {
     deinit {
         print("deinit home")
     }
@@ -34,6 +34,7 @@ class HomeViewController: ASViewController<ASDisplayNode> {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK:- Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -82,7 +83,6 @@ class HomeViewController: ASViewController<ASDisplayNode> {
     //MARK:- Support functions
     func getListPost() {
         ProgressHUD.show()
-//        var arrPostTmp = [Post]()
         Firebase.shared.getData(TableName.post, .childAdded) { [weak self] (data, key, error) in
             guard let strongSelf = self else { return }
             if error == nil {
@@ -96,31 +96,14 @@ class HomeViewController: ASViewController<ASDisplayNode> {
                     }
                 }
                 strongSelf.arrPost.insert(post, at: 0)
-//                arrPostTmp.insert(post, at: 0)
-
                 strongSelf.tableNode.insertRows(at: [IndexPath(row:0, section:0)], with: .none)
                 DispatchQueue.main.async {
-//                    strongSelf.tableView.reloadData()
-//                    strongSelf.insertDataInTableView(arrPostTmp)
                     ProgressHUD.dismiss()
                 }
             } else {
                 ProgressHUD.showError(error!)
             }
         }
-    }
-    
-    
-    private func insertDataInTableView(_ arrPost:[Post]) {
-        self.arrPost = arrPost
-        tableNode.reloadData()
-//        let section = 0
-//        var indexPaths = [IndexPath]()
-//        arrPost.enumerated().forEach { (row, post) in
-//            let path = IndexPath(row: row, section: section)
-//            indexPaths.append(path)
-//        }
-//        tableNode.insertRows(at: indexPaths, with: .none)
     }
     
     
