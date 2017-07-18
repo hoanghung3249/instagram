@@ -109,7 +109,7 @@ class HomeCell: ASCellNode {
         
         //Get cell width
         let cellWidth = constrainedSize.max.width
-        imgStatus.style.preferredSize = CGSize(width: cellWidth, height: 200)
+        imgStatus.style.preferredSize = CGSize(width: cellWidth, height: 250)
         let photoImageViewAbsolute = ASAbsoluteLayoutSpec(children: [imgStatus])
         
         //Layout for button

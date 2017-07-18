@@ -26,13 +26,13 @@ class InfoViewController: UICollectionViewController {
         // Do any additional setup after loading the view.
         self.view.backgroundColor = UIColor.white
         setupCollectionView()
-        getCurrentUserData()
         getImageUser()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if userProfile != nil {
+            self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 15)]
             self.navigationItem.title = self.userProfile?.username
         }
     }
@@ -54,30 +54,6 @@ class InfoViewController: UICollectionViewController {
     
     
     //MARK:- Support functions
-    func getCurrentUserData() {
-        ProgressHUD.show()
-        Firebase.shared.getCurUser(TableName.user, (aut?.currentUser?.uid)!, .value) { [weak self] (data, key, error) in
-            guard let strongSelf = self else { return }
-            if error == nil {
-                guard let value = data else { return }
-                var user = User()
-                user.uid = key!
-                user.email = value["email"] as? String ?? ""
-                user.username = value["username"] as? String ?? ""
-                user.avatarUrl = value["avatar"] as? String ?? ""
-                strongSelf.userProfile = user
-                strongSelf.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 15)]
-                strongSelf.navigationItem.title = strongSelf.userProfile?.username
-                DispatchQueue.main.async {
-                    strongSelf.collectionView?.reloadData()
-                    ProgressHUD.dismiss()
-                }
-            } else {
-                ProgressHUD.showError(error)
-            }
-        }
-    }
-    
     
     private func getImageUser() {
         Firebase.shared.getChildData(TableName.userPost, (aut?.currentUser?.uid)!, .childAdded) { [weak self] (data, key, error) in

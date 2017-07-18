@@ -11,15 +11,6 @@ import Kingfisher
 
 class HeaderProfile: UICollectionReusableView {
     
-//    var user:User? {
-//        didSet {
-//            self.lblName.text = user?.username
-//            let imgAvatar = URL(string: (user?.avatarUrl)!)
-//            DispatchQueue.main.async {
-//                self.imgAvatar.kf.setImage(with: imgAvatar)
-//            }
-//        }
-//    }
     
     var completionEdit:(()->())?
     
@@ -42,7 +33,7 @@ class HeaderProfile: UICollectionReusableView {
     
     let viewBound:UIView =  {
         let view:UIView = UIView()
-        view.backgroundColor = .gray
+        view.backgroundColor = .clear
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()

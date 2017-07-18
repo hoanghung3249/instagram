@@ -75,7 +75,6 @@ class CameraViewController: UIViewController {
         self.addSubview()
         self.setupDelegate()
         self.setupUI()
-        self.getCurrentUser()
         self.tapToHideKeyboard()
         self.view.backgroundColor = UIColor.white
     }
@@ -131,17 +130,6 @@ class CameraViewController: UIViewController {
     
     func setupDelegate() {
         self.textViewInput.delegate = self
-    }
-    
-    func getCurrentUser() {
-        self.ref.child("User").child((self.auth?.currentUser?.uid)!).observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
-            guard let strongSelf = self else { return }
-            guard let value = snapshot.value as? Dictionary<String,AnyObject> else { return }
-            strongSelf.userName = value["username"] as? String
-            strongSelf.urlAvatar = value["avatar"] as? String
-        }) { (error) in
-            ProgressHUD.showError(error.localizedDescription)
-        }
     }
     
     //MARK:- Action functions

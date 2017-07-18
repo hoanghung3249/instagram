@@ -41,7 +41,6 @@ class HomeViewController: ASViewController<ASDisplayNode> {
         self.setupNavigation()
         self.tabBarController?.tabBar.isTranslucent = false
 //        self.registerCell()
-        getCurrentUser()
         getListPost()
         tableNode.view.separatorStyle = .none
     }
@@ -83,7 +82,7 @@ class HomeViewController: ASViewController<ASDisplayNode> {
     //MARK:- Support functions
     func getListPost() {
         ProgressHUD.show()
-        var arrPostTmp = [Post]()
+//        var arrPostTmp = [Post]()
         Firebase.shared.getData(TableName.post, .childAdded) { [weak self] (data, key, error) in
             guard let strongSelf = self else { return }
             if error == nil {
@@ -111,23 +110,6 @@ class HomeViewController: ASViewController<ASDisplayNode> {
         }
     }
     
-    private func getCurrentUser() {
-        Firebase.shared.getCurUser(TableName.user, (aut?.currentUser?.uid)!, .value) { [weak self] (data, key, error) in
-            guard let strongSelf = self else { return }
-            if error == nil {
-                guard let value = data else { return }
-                var currentUser = User()
-                currentUser.avatarUrl = value["avatar"] as? String ?? ""
-                currentUser.username = value["username"] as? String ?? ""
-                currentUser.email = value["email"] as? String ?? ""
-                currentUser.uid = aut?.currentUser?.uid ?? ""
-                strongSelf.curUser = currentUser
-            } else {
-                ProgressHUD.showError(error!)
-            }
-        }
-    }
-    
     
     private func insertDataInTableView(_ arrPost:[Post]) {
         self.arrPost = arrPost
@@ -143,51 +125,6 @@ class HomeViewController: ASViewController<ASDisplayNode> {
     
     
 }
-
-//extension HomeViewController {
-//    
-//    
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        return 1
-//    }
-//    
-//    
-//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return arrPost.count
-//    }
-//    
-//    
-//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! HomeTableViewCell
-//        if arrPost.count != 0 {
-//            let post = arrPost[indexPath.row]
-//            cell.configCell(post: post)
-//        }
-//        
-//        cell.completionShowComment = { [unowned self] sender in
-//            if sender == cell.btnComment {
-//                let commentVC = CommentViewController()
-//                commentVC.curUser = self.curUser
-//                commentVC.postID = self.arrPost[indexPath.row].id
-//                commentVC.hidesBottomBarWhenPushed = true
-//                self.navigationController?.navigationBar.tintColor = .black
-//                self.navigationController?.pushViewController(commentVC, animated: true)
-//            }
-//        }
-//        cell.completionUpdatePost = { [unowned self] post in
-//            self.arrPost[indexPath.row] = post
-//        }
-//        
-//        cell.selectionStyle = .none
-//        
-//        return cell
-//    }
-//    
-//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return UITableViewAutomaticDimension
-//    }
-//}
-
 
 extension HomeViewController:ASTableDataSource, ASTableDelegate {
     
