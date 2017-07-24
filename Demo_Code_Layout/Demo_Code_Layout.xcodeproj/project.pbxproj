@@ -35,6 +35,8 @@
 		459AC7B11EE9428900DD1D69 /* ImageUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459AC7B01EE9428900DD1D69 /* ImageUserCell.swift */; };
 		459AC7B51EE94DB300DD1D69 /* HeaderProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459AC7B41EE94DB300DD1D69 /* HeaderProfile.swift */; };
 		45D0205C1EE7EE21008B1DCB /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D0205B1EE7EE21008B1DCB /* HomeTableViewCell.swift */; };
+		45D653251F1F14030003A466 /* FirstEditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D653241F1F14030003A466 /* FirstEditCell.swift */; };
+		45D653271F1F14120003A466 /* SecondEditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D653261F1F14120003A466 /* SecondEditCell.swift */; };
 		45F242D11EF013CE002EBCC8 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F242D01EF013CE002EBCC8 /* NotificationCell.swift */; };
 		45F69D211EE26A72003C4933 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F69D201EE26A72003C4933 /* CameraViewController.swift */; };
 		45FFDB1E1EEA9C8B006D7A63 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FFDB1D1EEA9C8B006D7A63 /* CommentViewController.swift */; };
@@ -73,6 +75,8 @@
 		459AC7B01EE9428900DD1D69 /* ImageUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageUserCell.swift; sourceTree = "<group>"; };
 		459AC7B41EE94DB300DD1D69 /* HeaderProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderProfile.swift; sourceTree = "<group>"; };
 		45D0205B1EE7EE21008B1DCB /* HomeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
+		45D653241F1F14030003A466 /* FirstEditCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstEditCell.swift; sourceTree = "<group>"; };
+		45D653261F1F14120003A466 /* SecondEditCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondEditCell.swift; sourceTree = "<group>"; };
 		45F242D01EF013CE002EBCC8 /* NotificationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		45F69D201EE26A72003C4933 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		45F69D251EE26EF4003C4933 /* Demo_Code_Layout-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Demo_Code_Layout-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -139,6 +143,8 @@
 			isa = PBXGroup;
 			children = (
 				453C83CD1EE9AD230003CEEE /* EditProfileViewController.swift */,
+				45D653241F1F14030003A466 /* FirstEditCell.swift */,
+				45D653261F1F14120003A466 /* SecondEditCell.swift */,
 			);
 			name = EditProfile;
 			sourceTree = "<group>";
@@ -464,6 +470,7 @@
 				459AC7AD1EE8FD4E00DD1D69 /* User.swift in Sources */,
 				4531F83C1EEB9F030045C08E /* Comment.swift in Sources */,
 				45D0205C1EE7EE21008B1DCB /* HomeTableViewCell.swift in Sources */,
+				45D653251F1F14030003A466 /* FirstEditCell.swift in Sources */,
 				455C8A7C1EDEDC34004858FC /* RegisterViewController.swift in Sources */,
 				459AC7AF1EE8FE6400DD1D69 /* Post.swift in Sources */,
 				455C8A761EDEB73B004858FC /* HomeViewController.swift in Sources */,
@@ -472,6 +479,7 @@
 				457547F91EE1665E0008C995 /* InstagramActivityIndicator.swift in Sources */,
 				455C8A781EDEB751004858FC /* InfoViewController.swift in Sources */,
 				45F69D211EE26A72003C4933 /* CameraViewController.swift in Sources */,
+				45D653271F1F14120003A466 /* SecondEditCell.swift in Sources */,
 				45FFDB1E1EEA9C8B006D7A63 /* CommentViewController.swift in Sources */,
 				451677E01F0E14EB00767D79 /* Constants.swift in Sources */,
 			);

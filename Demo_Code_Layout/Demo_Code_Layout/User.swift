@@ -13,4 +13,6 @@ struct User {
     var username:String = ""
     var email:String = ""
     var avatarUrl:String = ""
+    var gender:String = ""
+    var phoneNumber:String = ""
 }
