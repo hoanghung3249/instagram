@@ -8,15 +8,17 @@
 
 import UIKit
 
-class TabBarController: UITabBarController {
+class TabBarController: UITabBarController, UITabBarControllerDelegate {
     
     
     var curUser:User?
+    var previousController:UIViewController?
     
 //MARK:- Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        self.delegate = self
         self.getCurrentUser { [weak self] in
             guard let strongSelf = self else { return }
             strongSelf.setupViewControllers()
@@ -56,11 +58,38 @@ class TabBarController: UITabBarController {
         navNoti.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "Activity"), selectedImage: UIImage(named: "Activity_Selected"))
         
         self.viewControllers = [navHomeVC,navSearch,navCamera,navNoti,navInfo]
-        
+        self.previousController = homeVC
         self.selectedViewController = navHomeVC
         
     }
     
+    
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        guard let navi = tabBarController.selectedViewController as? UINavigationController else { return false }
+        if let homeVC = navi.viewControllers.first as? HomeViewController {
+            self.previousController = homeVC
+        } else if let searchVC = navi.viewControllers.first as? SearchViewController {
+            self.previousController = searchVC
+        } else if let cameraVC = navi.viewControllers.first as? CameraViewController {
+            self.previousController = cameraVC
+        } else if let infoVC = navi.viewControllers.first as? InfoViewController {
+            self.previousController = infoVC
+        } else if let notiVC = navi.viewControllers.first as? NotificationViewController {
+            self.previousController = notiVC
+        }
+        return true
+    }
+    
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        guard let navi = viewController as? UINavigationController else { return }
+        if let homeVC = navi.viewControllers.first as? HomeViewController {
+            if self.previousController == homeVC {
+                let indexPath = IndexPath(row: 0, section: 0)
+                homeVC.tableNode.scrollToRow(at: indexPath, at: .top, animated: true)
+            }
+        }
+    }
     
     
     private func getCurrentUser(completion:@escaping ()->()) {
