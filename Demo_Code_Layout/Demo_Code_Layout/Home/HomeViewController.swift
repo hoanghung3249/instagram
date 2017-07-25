@@ -121,11 +121,12 @@ extension HomeViewController:ASTableDataSource, ASTableDelegate {
     
     func tableNode(_ tableNode: ASTableNode, nodeBlockForRowAt indexPath: IndexPath) -> ASCellNodeBlock {
         let post = self.arrPost[indexPath.row]
-        let cellNode:ASCellNodeBlock = { _ in
+        let cellNode:ASCellNodeBlock = { [weak self] _ in
+            guard let strongSelf = self else { return ASCellNode() }
             let cellNode = HomeCell(post: post)
             cellNode.selectionStyle = .none
             cellNode.row = indexPath.row
-            cellNode.delegate = self
+            cellNode.delegate = strongSelf
             return cellNode
         }
         return cellNode

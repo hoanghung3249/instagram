@@ -84,7 +84,13 @@ class HomeCell: ASCellNode {
         self.btnShowLike = ASButtonNode()
         btnShowLike.contentHorizontalAlignment = .left
         if count != 0 {
-            btnShowLike.setTitle("\(count) Likes", with: UIFont.italicSystemFont(ofSize: 13), with: .black, for: .normal)
+            var countString = ""
+            if count == 1 {
+                countString = "\(count) Like"
+            } else {
+                countString = "\(count) Likes"
+            }
+            btnShowLike.setTitle(countString, with: UIFont.italicSystemFont(ofSize: 13), with: .black, for: .normal)
         } else if post.likeCount == 0 {
             btnShowLike.setTitle("Be the first to Like this", with: UIFont.italicSystemFont(ofSize: 13), with: .black, for: .normal)
         }
@@ -213,7 +219,13 @@ class HomeCell: ASCellNode {
         }
         
         if count != 0 {
-            btnShowLike.setTitle("\(count) Likes", with: UIFont.italicSystemFont(ofSize: 13), with: .black, for: .normal)
+            var countString = ""
+            if count == 1 {
+                countString = "\(count) Like"
+            } else {
+                countString = "\(count) Likes"
+            }
+            btnShowLike.setTitle(countString, with: UIFont.italicSystemFont(ofSize: 13), with: .black, for: .normal)
         } else if post.likeCount == 0 {
             btnShowLike.setTitle("Be the first to Like this", with: UIFont.italicSystemFont(ofSize: 13), with: .black, for: .normal)
         }
