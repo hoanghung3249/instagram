@@ -110,7 +110,9 @@ extension TabBarController: UITabBarControllerDelegate {
         if let homeVC = navi.viewControllers.first as? HomeViewController {
             if self.previousController == homeVC {
                 let indexPath = IndexPath(row: 0, section: 0)
-                homeVC.tableNode.scrollToRow(at: indexPath, at: .top, animated: true)
+                DispatchQueue.main.async {
+                    homeVC.tableNode.scrollToRow(at: indexPath, at: .top, animated: true)
+                }
             }
         }
     }
