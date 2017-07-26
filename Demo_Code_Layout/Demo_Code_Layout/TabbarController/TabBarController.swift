@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import AsyncDisplayKit
 
-class TabBarController: UITabBarController, UITabBarControllerDelegate {
+class TabBarController: ASTabBarController {
     
     
     var curUser:User?
@@ -64,6 +65,29 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     }
     
     
+    private func getCurrentUser(completion:@escaping ()->()) {
+        Firebase.shared.getCurUser(TableName.user, (aut?.currentUser?.uid)!, .value) { [weak self] (data, key, error) in
+            guard let strongSelf = self else { return }
+            if error == nil {
+                guard let value = data else { return }
+                var currentUser = User()
+                currentUser.avatarUrl = value["avatar"] as? String ?? ""
+                currentUser.username = value["username"] as? String ?? ""
+                currentUser.email = value["email"] as? String ?? ""
+                currentUser.uid = aut?.currentUser?.uid ?? ""
+                strongSelf.curUser = currentUser
+                completion()
+            } else {
+                ProgressHUD.showError(error!)
+            }
+        }
+    }
+
+}
+
+//MARK:- Tabbar Delegate
+extension TabBarController: UITabBarControllerDelegate {
+    
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         guard let navi = tabBarController.selectedViewController as? UINavigationController else { return false }
         if let homeVC = navi.viewControllers.first as? HomeViewController {
@@ -90,25 +114,5 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
             }
         }
     }
-    
-    
-    private func getCurrentUser(completion:@escaping ()->()) {
-        Firebase.shared.getCurUser(TableName.user, (aut?.currentUser?.uid)!, .value) { [weak self] (data, key, error) in
-            guard let strongSelf = self else { return }
-            if error == nil {
-                guard let value = data else { return }
-                var currentUser = User()
-                currentUser.avatarUrl = value["avatar"] as? String ?? ""
-                currentUser.username = value["username"] as? String ?? ""
-                currentUser.email = value["email"] as? String ?? ""
-                currentUser.uid = aut?.currentUser?.uid ?? ""
-                strongSelf.curUser = currentUser
-                completion()
-            } else {
-                ProgressHUD.showError(error!)
-            }
-        }
-    }
-
 }
 
