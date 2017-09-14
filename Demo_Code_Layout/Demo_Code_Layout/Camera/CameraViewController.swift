@@ -83,7 +83,7 @@ class CameraViewController: UIViewController {
     
     //MARK:- Support Functions
     func setupNavigation() {
-        self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont(name: "Billabong", size: 30)!]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: Font.Billabong(30)]
         self.navigationItem.title = "Camera"
     }
     

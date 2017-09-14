@@ -34,6 +34,7 @@
 		459AC7AF1EE8FE6400DD1D69 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459AC7AE1EE8FE6400DD1D69 /* Post.swift */; };
 		459AC7B11EE9428900DD1D69 /* ImageUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459AC7B01EE9428900DD1D69 /* ImageUserCell.swift */; };
 		459AC7B51EE94DB300DD1D69 /* HeaderProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459AC7B41EE94DB300DD1D69 /* HeaderProfile.swift */; };
+		45CFEE951F6A7F880026B288 /* Helpler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CFEE941F6A7F880026B288 /* Helpler.swift */; };
 		45D0205C1EE7EE21008B1DCB /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D0205B1EE7EE21008B1DCB /* HomeTableViewCell.swift */; };
 		45D653251F1F14030003A466 /* FirstEditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D653241F1F14030003A466 /* FirstEditCell.swift */; };
 		45D653271F1F14120003A466 /* SecondEditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D653261F1F14120003A466 /* SecondEditCell.swift */; };
@@ -74,6 +75,7 @@
 		459AC7AE1EE8FE6400DD1D69 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		459AC7B01EE9428900DD1D69 /* ImageUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageUserCell.swift; sourceTree = "<group>"; };
 		459AC7B41EE94DB300DD1D69 /* HeaderProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderProfile.swift; sourceTree = "<group>"; };
+		45CFEE941F6A7F880026B288 /* Helpler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpler.swift; sourceTree = "<group>"; };
 		45D0205B1EE7EE21008B1DCB /* HomeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		45D653241F1F14030003A466 /* FirstEditCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstEditCell.swift; sourceTree = "<group>"; };
 		45D653261F1F14120003A466 /* SecondEditCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondEditCell.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				451677DF1F0E14EB00767D79 /* Constants.swift */,
+				45CFEE941F6A7F880026B288 /* Helpler.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -475,6 +478,7 @@
 				459AC7AF1EE8FE6400DD1D69 /* Post.swift in Sources */,
 				455C8A761EDEB73B004858FC /* HomeViewController.swift in Sources */,
 				459AC7AA1EE8E9B600DD1D69 /* Extension.swift in Sources */,
+				45CFEE951F6A7F880026B288 /* Helpler.swift in Sources */,
 				45FFDB201EEADDBC006D7A63 /* CommentCell.swift in Sources */,
 				457547F91EE1665E0008C995 /* InstagramActivityIndicator.swift in Sources */,
 				455C8A781EDEB751004858FC /* InfoViewController.swift in Sources */,
