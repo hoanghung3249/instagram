@@ -49,7 +49,7 @@ final class HomeViewController: ASViewController<ASDisplayNode> {
     
     //MARK:- Init functions
     func setupNavigation() {
-        self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont(name: "Billabong", size: 30)!]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: Font.Billabong(30)]
         self.navigationItem.title = "Instagram"
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Log Out", style: .plain, target: self, action: #selector(logOut))
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.black
