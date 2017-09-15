@@ -232,8 +232,8 @@ extension CameraViewController: UIImagePickerControllerDelegate, UINavigationCon
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            self.imageSelected = image.resized(toWidth: 414)
-            
+            let imgData = UIImageJPEGRepresentation(image, 0.1)
+            self.imageSelected = UIImage(data: imgData!)
         }
         
         dismiss(animated: true) { [weak self] in

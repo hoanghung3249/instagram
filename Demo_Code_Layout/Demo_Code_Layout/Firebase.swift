@@ -62,7 +62,7 @@ struct Firebase {
     }
     
     func uploadImage(_ imgUpload:UIImage,_ child:String, completion: @escaping (_ imgUrl:String?,_ imgName:String?,_ error:String?)->()) {
-        let imageData = UIImagePNGRepresentation(imgUpload)
+        let imageData = UIImageJPEGRepresentation(imgUpload, 0.1)
         let imgName = UUID().uuidString
         let name = imgName + ".jpg"
         let imgStorage = self.storage.child(child)

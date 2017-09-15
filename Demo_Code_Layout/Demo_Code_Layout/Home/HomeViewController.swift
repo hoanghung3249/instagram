@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import ACProgressHUD_Swift
-import Kingfisher
 import SwiftyJSON
 import AsyncDisplayKit
 
@@ -54,15 +52,6 @@ final class HomeViewController: ASViewController<ASDisplayNode> {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Log Out", style: .plain, target: self, action: #selector(logOut))
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.black
     }
-    
-    
-//    func registerCell() {
-//        tableView.register(HomeTableViewCell.self, forCellReuseIdentifier: cellId)
-//        tableView.estimatedRowHeight = 350.0
-//        tableView.separatorInset = UIEdgeInsets.zero
-//        tableView.separatorStyle = .none
-//    }
-    
     
     //MARK:- Action functions
     
